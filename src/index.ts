@@ -1,4 +1,4 @@
-export function deepTypeEquals<T>( testInput: T, dataToTest: unknown ): boolean {
+export default function deepTypeEquals<T>( testInput: T, dataToTest: unknown ): boolean {
 	let isTypeMatch = false;
 
 	if ( Array.isArray( testInput ) && Array.isArray( dataToTest )) {

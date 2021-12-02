@@ -1,47 +1,62 @@
 
-import { deepTypeEquals  } from "../../src";
+import deepTypeEquals from "../../src";
 
-test( "string against string", () => {
+test( "string", () => {
 	const result = deepTypeEquals<string>( "dummy string", "string to test" );
 	expect( result ).toBe( true );
 });
 
-test( "string against number", () => {
+test( "empty string", () => {
+	const result = deepTypeEquals<string>( "dummy string", "" );
+	expect( result ).toBe( true );
+});
+
+test( "empty test string", () => {
+	const result = deepTypeEquals<string>( "", "string to test" );
+	expect( result ).toBe( true );
+});
+
+test( "number", () => {
 	const result = deepTypeEquals<string>( "dummy string", 24 );
 	expect( result ).toBe( false );
 });
 
-test( "string against false", () => {
+test( "false", () => {
 	const result = deepTypeEquals<string>( "dummy string", false );
 	expect( result ).toBe( false );
 });
 
-test( "string against empty object", () => {
+test( "false and empty test string", () => {
+	const result = deepTypeEquals<string>( "", false );
+	expect( result ).toBe( false );
+});
+
+test( "empty object", () => {
 	const result = deepTypeEquals<string>( "dummy string", {});
 	expect( result ).toBe( false );
 });
 
-test( "string against object with key: string", () => {
+test( "object with key: string", () => {
 	const result = deepTypeEquals<string>( "dummy string", { test: "test" });
 	expect( result ).toBe( false );
 });
 
-test( "string against undefined", () => {
+test( "undefined", () => {
 	const result = deepTypeEquals<string>( "dummy string", undefined );
 	expect( result ).toBe( false );
 });
 
-test( "string against null", () => {
+test( "null", () => {
 	const result = deepTypeEquals<string>( "dummy string", null );
 	expect( result ).toBe( false );
 });
 
-test( "string against NaN", () => {
+test( "NaN", () => {
 	const result = deepTypeEquals<string>( "dummy string", NaN );
 	expect( result ).toBe( false );
 });
 
-test( "string against array of strings", () => {
+test( "array of strings", () => {
 	const result = deepTypeEquals<string>( "dummy string", [ "test" ]);
 	expect( result ).toBe( false );
 });

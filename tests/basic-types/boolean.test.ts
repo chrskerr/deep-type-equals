@@ -1,5 +1,5 @@
 
-import { deepTypeEquals  } from "../../src";
+import deepTypeEquals from "../../src";
 
 test( "false against string", () => {
 	const result = deepTypeEquals<boolean>( false, "string to test" );
