@@ -1,13 +1,13 @@
 {
 	"name": "deep-type-equals",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"description": "Deep runtime type equality testing",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"start": "tsc && node dist/index.js",
 		"test": "jest",
-		"deploy": "tsc && npm publish"
+		"deploy": "tsc && npm run test && npm publish"
 	},
 	"author": "Chris Kerr",
 	"license": "GPL-3.0",
