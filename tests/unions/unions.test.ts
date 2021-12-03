@@ -50,15 +50,9 @@ test( "array union 3", () => {
 	expect( result ).toBe( false );
 });
 
+test( "array union 4", () => {
+	type Union = string | number 
 
-// test( "string", () => {
-// 	const result = deepTypeEquals<string | number>([ "string", 2512 ], 152 );
-// 	expect( result ).toBe( true );
-// });
-
-
-// test( "string", () => {
-// 	const result = deepTypeEquals<string | number>([ "string", 2512 ], true );
-// 	expect( result ).toBe( false );
-// });
-
+	const result = deepTypeEquals<Union[]>([ union<Union>( "string", 2512 ) ], [ "string to test", 245 ]);
+	expect( result ).toBe( true );
+});

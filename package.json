@@ -1,6 +1,6 @@
 {
   "name": "deep-type-equals",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Deep runtime type equality testing",
   "main": "index.js",
   "scripts": {
