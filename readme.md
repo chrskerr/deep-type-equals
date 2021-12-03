@@ -10,7 +10,7 @@ yarn add deep-type-equals
 ```
 
 ```txs
-import deepTypeEquals, { union } from "deep-type-equals"
+import deepTypeEquals, { union } from "deep-type-equals";
 ```
 
 ### Basic Types
@@ -35,13 +35,15 @@ deepTypeEquals<string[]>([ "test string" ], "input" ); // false
 ```txs
  type TestUnion = string | number;
  const testCase = union<TestUnion>( "test string", 123 );
- deepTypeEquals<TestUnion>( testCase, "string to test" ) // true;
- deepTypeEquals<TestUnion>( testCase, true ) // false;
+
+ deepTypeEquals<TestUnion>( testCase, "string to test" ); // true;
+ deepTypeEquals<TestUnion>( testCase, true ); // false;
 ```
 
 ```txs
  type TestUnion = string | number;
  const testCase = union<TestUnion>( "test string", 123 );
- const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], [ "string to test" ]) // true;
- const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], "string to test" ) // false;
+
+ const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], [ "string to test" ]); // true;
+ const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], "string to test" ); // false;
 ```
