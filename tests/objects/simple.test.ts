@@ -1,8 +1,8 @@
 
-import deepTypeEquals from "../../src";
+import deepTypeEquals from "../";
 
 test( "single key", () => {
-	interface Type {
+	type Type = {
 		key: string,
 	}
 
@@ -15,7 +15,7 @@ test( "single key", () => {
 });
 
 test( "single key 2", () => {
-	interface Type {
+	type Type = {
 		key: string,
 	}
 
@@ -28,7 +28,7 @@ test( "single key 2", () => {
 });
 
 test( "mixed keys 1", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: boolean,
@@ -45,7 +45,7 @@ test( "mixed keys 1", () => {
 });
 
 test( "mixed keys 2", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: boolean,
@@ -62,7 +62,7 @@ test( "mixed keys 2", () => {
 });
 
 test( "mixed keys 3", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: boolean,
@@ -79,7 +79,7 @@ test( "mixed keys 3", () => {
 });
 
 test( "mixed keys 4", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: boolean,

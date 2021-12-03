@@ -1,45 +1,58 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unknown = exports.union = void 0;
-function deepTypeEquals(referenceInput, dataToTest) {
-    let isTypeMatch = false;
-    if (typeof referenceInput === "function") {
-        isTypeMatch = referenceInput(dataToTest);
+exports.optional = exports.unknown = exports.literal = exports.union = exports.createDeepTypeEquals = void 0;
+/**
+ * Deeply checks if the input data type matches the reference.
+ * @param reference an example of the type which should be tested
+ * @param data the data to confirm if it conforms to the reference type
+ * @returns boolean
+ */
+function deepTypeEquals(reference, data, options) {
+    if (typeof reference === "function") {
+        return reference(data);
     }
-    else if (Array.isArray(referenceInput)) {
-        if (Array.isArray(dataToTest)) {
-            isTypeMatch = !dataToTest.some((curr) => {
-                return !deepTypeEquals(referenceInput[0], curr);
-            });
-        }
+    else if (Array.isArray(reference) && Array.isArray(data)) {
+        return !data.some((curr) => {
+            return !deepTypeEquals(reference[0], curr);
+        });
     }
-    else if (typeof referenceInput === "object" && typeof dataToTest === "object") {
-        const testEntries = Object.entries(referenceInput);
-        const typedDataToTest = dataToTest;
-        const dataEntries = Object.entries(typedDataToTest);
-        if (testEntries.length !== dataEntries.length) {
-            isTypeMatch = false;
-        }
-        else {
-            isTypeMatch = !testEntries.some(([key, value]) => {
-                return !deepTypeEquals(value, typedDataToTest[key]);
-            });
-        }
+    else if (typeof reference === "object" && typeof data === "object") {
+        const typedData = data;
+        const dataKeys = Object.keys(typedData);
+        const testKeys = Object.keys(reference);
+        if (!options?.allowUnspecifiedObjectKeys && dataKeys.some(key => !testKeys.includes(key)))
+            return false;
+        return !Object.entries(reference).some(([key, value]) => {
+            return !deepTypeEquals(value, typedData[key]);
+        });
     }
     else {
-        if (Number.isNaN(referenceInput) || Number.isNaN(dataToTest)) {
-            isTypeMatch = false;
+        if (Number.isNaN(reference) || Number.isNaN(data)) {
+            return false;
         }
         else {
-            isTypeMatch = isBasicMatch(referenceInput, dataToTest);
+            return isBasicMatch(reference, data);
         }
     }
-    return isTypeMatch;
 }
 exports.default = deepTypeEquals;
+/**
+ * Returns a curried instance of deepTypeEquals
+ * @param reference
+ * @returns ( data ) => boolean;
+ */
+function createDeepTypeEquals(reference) {
+    return (data, options) => deepTypeEquals(reference, data, options);
+}
+exports.createDeepTypeEquals = createDeepTypeEquals;
 const isBasicMatch = (a, b) => {
-    return a === b || typeof a === typeof b;
+    return typeof a === typeof b;
 };
+/**
+ *
+ * @param args each argument should be an example of the types that is correct under this union.
+ * @returns boolean
+ */
 function union(...args) {
     // @ts-ignore
     return (input) => {
@@ -47,9 +60,23 @@ function union(...args) {
     };
 }
 exports.union = union;
+function literal(arg) {
+    // @ts-ignore
+    return (input) => {
+        return arg === input;
+    };
+}
+exports.literal = literal;
 function unknown() {
     // @ts-ignore
     return () => true;
 }
 exports.unknown = unknown;
+function optional(arg) {
+    // @ts-ignore
+    return (input) => {
+        return input === undefined || deepTypeEquals(arg, input);
+    };
+}
+exports.optional = optional;
 //# sourceMappingURL=index.js.map

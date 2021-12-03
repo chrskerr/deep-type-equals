@@ -1,35 +1,37 @@
 {
-  "name": "deep-type-equals",
-  "version": "0.1.0",
-  "description": "Deep runtime type equality testing",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "start": "tsc && node dist/index.js",
-    "test": "jest"
-  },
-  "author": "Chris Kerr",
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.11",
-    "@typescript-eslint/eslint-plugin": "^5.5.0",
-    "@typescript-eslint/parser": "^5.5.0",
-    "eslint": "^8.3.0",
-    "jest": "^27.4.3",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.5.2"
-  },
-  "repository": {
-	  "type": "git",
-	  "url": "https://github.com/chrskerr/deep-type-equals"
-  },
-  "keywords": [
-	  "typescript",
-	  "ts",
-	  "deep",
-	  "runtime",
-	  "type",
-	  "check"
-  ]
+	"name": "deep-type-equals",
+	"version": "0.1.6",
+	"description": "Deep runtime type equality testing",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"scripts": {
+		"start": "tsc && node dist/index.js",
+		"test": "jest",
+		"deploy": "tsc && npm run test && npm publish"
+	},
+	"author": "Chris Kerr",
+	"license": "GPL-3.0",
+	"devDependencies": {
+		"@types/jest": "^27.0.3",
+		"@types/node": "^16.11.11",
+		"@typescript-eslint/eslint-plugin": "^5.5.0",
+		"@typescript-eslint/parser": "^5.5.0",
+		"eslint": "^8.3.0",
+		"jest": "^27.4.3",
+		"ts-jest": "^27.0.7",
+		"typescript": "^4.5.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chrskerr/deep-type-equals"
+	},
+	"keywords": [
+		"typescript",
+		"ts",
+		"deep",
+		"runtime",
+		"type",
+		"check"
+	],
+	"sideEffects": false
 }

@@ -1,8 +1,8 @@
 
-import deepTypeEquals from "../../src";
+import deepTypeEquals from "../";
 
 test( "nested 1", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: {
@@ -34,7 +34,7 @@ test( "nested 1", () => {
 });
 
 test( "nested 2", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: {
@@ -66,7 +66,7 @@ test( "nested 2", () => {
 });
 
 test( "nested 3", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: {
@@ -95,7 +95,7 @@ test( "nested 3", () => {
 });
 
 test( "nested array 1", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: {
@@ -139,7 +139,7 @@ test( "nested array 1", () => {
 });
 
 test( "nested array 2", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: {
@@ -183,7 +183,7 @@ test( "nested array 2", () => {
 });
 
 test( "nested array 3", () => {
-	interface Type {
+	type Type = {
 		key: string,
 		second: number,
 		third: {

@@ -1,14 +1,15 @@
 {
 	"compilerOptions": {
-	  "target": "es6", 
-	  "module": "commonjs", 
-	  "sourceMap": true, 
-	  "outDir": "./dist", 
-	  "strict": true, 
-	  "moduleResolution": "node", 
-	  "esModuleInterop": true,
-	  "forceConsistentCasingInFileNames": true,
-	  "declaration": true
+		"declaration": true,
+		"declarationMap": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"module": "commonjs", 
+		"moduleResolution": "node", 
+		"outDir": "./dist", 
+		"sourceMap": true, 
+		"strict": true, 
+		"target": "esNext"
 	},
 	"include": [
 		"src"
