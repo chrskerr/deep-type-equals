@@ -1,27 +1,27 @@
-export default function deepTypeEquals<T>( testInput: T, dataToTest: unknown ): boolean {
+export default function deepTypeEquals<T>( referenceInput: T, dataToTest: unknown ): boolean {
 	let isTypeMatch = false;
 	
-	if ( typeof testInput === "function" ) {
-		isTypeMatch = testInput( dataToTest );
+	if ( typeof referenceInput === "function" ) {
+		isTypeMatch = referenceInput( dataToTest );
 	}
-	else if ( Array.isArray( testInput )) {
+	else if ( Array.isArray( referenceInput )) {
 		if ( Array.isArray( dataToTest )) {
 			isTypeMatch = !dataToTest.some(( curr ) => {
-				return !deepTypeEquals( testInput[ 0 ], curr );
+				return !deepTypeEquals( referenceInput[ 0 ], curr );
 			});
 		}
-	} else if ( typeof testInput === "object" && typeof dataToTest === "object" ) {
-		const testEntries = Object.entries( testInput );
+	} else if ( typeof referenceInput === "object" && typeof dataToTest === "object" ) {
+		const testEntries = Object.entries( referenceInput );
 		const typedDataToTest = dataToTest as Record<string, unknown>;
 
 		isTypeMatch = !testEntries.some(([ key, value ]) => {
 			return !deepTypeEquals( value, typedDataToTest[ key ]);
 		});
 	} else {
-		if ( Number.isNaN( testInput ) || Number.isNaN( dataToTest )) {
+		if ( Number.isNaN( referenceInput ) || Number.isNaN( dataToTest )) {
 			isTypeMatch = false; 
 		} else {
-			isTypeMatch = isBasicMatch( testInput, dataToTest );
+			isTypeMatch = isBasicMatch( referenceInput, dataToTest );
 		}
 	}
 

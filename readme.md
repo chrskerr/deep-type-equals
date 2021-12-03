@@ -1,4 +1,4 @@
-# Deep Type Equality
+# Deep Type Equals
 
 This package is a helper to perform runtime typechecking for TS projects.
 
@@ -14,12 +14,12 @@ interface IExample {
  value: string,
 }
 
-const idealObject: IExample = {
+const reference: IExample = {
  id: 1,
  value: "value",
 }
 
-const result: boolean = deepTypeEquals(idealObject, dataToTest);
+const result: boolean = deepTypeEquals(reference, input);
 ```
 
 ### Using a type parameters
@@ -30,12 +30,12 @@ interface IExample {
  value: string,
 }
 
-const idealObject = {
+const reference = {
  id: 1,
  value: "value",
 }
 
-const result: boolean = deepTypeEquals<IExample>(idealObject, dataToTest);
+const result: boolean = deepTypeEquals<IExample>(reference, input);
 ```
 
 ### Set Up
