@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.unknown = exports.literal = exports.union = void 0;
+const parser_1 = require("@typescript-eslint/parser");
 function deepTypeEquals(referenceInput, dataToTest) {
     let isTypeMatch = false;
     if (typeof referenceInput === "function") {
@@ -59,4 +60,26 @@ function unknown() {
     return () => true;
 }
 exports.unknown = unknown;
+function createReference(input) {
+    console.log((0, parser_1.parse)(input));
+    // let reference: T;
+    // if ( input.startsWith( "{" )) {
+    // 	if ( !input.endsWith( "}" )) return null;
+    // 	const cleanedInput = input.replace( /^{/, "" ).replace( /}$/, "" ).split( /[;,\n]/ ).filter( Boolean );
+    // 	const entries = Object.entries( cleanedInput );
+    // 	console.log( entries );
+    // } else {
+    // 	const values = input.split( "|" ).map( input => {
+    // 		if ( input.endsWith( "[]" )) {
+    // 		}
+    // 	});
+    // }
+    // return reference;
+}
+createReference("string");
+createReference("type New = string");
+createReference(`interface Test {
+	one: "string";
+	two: "other" | ( string | number )[];
+}`);
 //# sourceMappingURL=index.js.map

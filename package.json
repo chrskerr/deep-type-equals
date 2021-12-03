@@ -32,5 +32,6 @@
 		"runtime",
 		"type",
 		"check"
-	]
+	],
+	"sideEffects": false
 }

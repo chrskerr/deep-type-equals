@@ -1,5 +1,6 @@
-
 type SameAs<T> = T;
+
+export { createReference } from "./parser";
 
 export default function deepTypeEquals<T>( referenceInput: T, dataToTest: SameAs<T> ): boolean {
 	let isTypeMatch = false;

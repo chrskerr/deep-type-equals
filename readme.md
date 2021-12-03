@@ -7,15 +7,13 @@
 
 ## Purpose
 
-This package is a zero dependency helper design to perform deep type equality checks at runtime.
+This package is a small, simple helper design to perform deep type equality checks at runtime.
 
-It uses your existing types plus a typed reference object to confirm if input data matches the intended type.
+- It uses your existing types plus a typed reference object to confirm if input data matches the intended type.
+- Works on simple types, literals, unions, arrays, objects and unknown.
+- IN PROGRESS: a parser which will create your references automaticallly at runtime.
 
 ## Usage
-
-You should pecify the idealObject type in either of the following methods to ensure that the idealObject always matches the type it is checking against.
-
-Works on simple types, literals, unions, arrays, objects and unknown.
 
 ### Using a typed example object
 
