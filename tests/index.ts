@@ -5,4 +5,4 @@ export default function testingWrapper<T>( referenceInput: T, dataToTest: unknow
 	return deepTypeEquals<T>( referenceInput, dataToTest as T );
 }
 
-export { unknown, union } from "../src";
+export { unknown, union, literal } from "../src";

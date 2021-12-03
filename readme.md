@@ -15,10 +15,12 @@ It uses your existing types plus a typed reference object to confirm if input da
 
 You should pecify the idealObject type in either of the following methods to ensure that the idealObject always matches the type it is checking against.
 
+Works on simple types, literals, unions, arrays, objects and unknown.
+
 ### Using a typed example object
 
 ```ts
-interface IExample {
+type IExample = {
  id: number,
  value: string,
 }
@@ -34,7 +36,7 @@ const result: boolean = deepTypeEquals(reference, input); // true or false
 ### Using a type parameters
 
 ```ts
-interface IExample {
+type IExample = {
  id: number,
  value: string,
 }
@@ -107,6 +109,22 @@ deepTypeEquals<{ key: string }>({ key: "test string" }, "input" ); // false
  deepTypeEquals<TestUnion[]>( reference, "string to test" ); // false;
 ```
 
+### Literals
+
+```ts
+deepTypeEquals( literal( "reference" ), "reference" ); // true
+deepTypeEquals( literal( "reference" ), "other" ); // false
+```
+
+```ts
+type Modes = "fast" | "slow";
+const reference = union<Modes>( literal( "fast" ), literal( "slow" ));
+
+deepTypeEquals( reference, "fast" ); // true
+deepTypeEquals( reference, "slow" ); // true
+deepTypeEquals( reference, "something else" ); // false
+```
+
 ### Unknown Types
 
 ```ts
@@ -115,9 +133,11 @@ deepTypeEquals<{ key: string }>({ key: "test string" }, "input" ); // false
  deepTypeEquals<TestUnion[]>( unknown(), 123 ); // true;
 ```
 
-## To do
+## Gaps
 
-- Add `function` type checker function
-- Add literals
-- Add more tests
-- Find edge cases which need more nuance
+- No way to test if a value is a function yet.
+- No way to ensure that you provide a reference for all possible union values.
+
+## Bugs, Feedback & Contributions
+
+I'd be glad to hear from you! So please provide any through issues, discussions or as a pull request above 😃

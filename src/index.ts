@@ -1,4 +1,7 @@
-export default function deepTypeEquals<T>( referenceInput: T, dataToTest: Omit<T, ""> ): boolean {
+
+type SameAs<T> = T;
+
+export default function deepTypeEquals<T>( referenceInput: T, dataToTest: SameAs<T> ): boolean {
 	let isTypeMatch = false;
 	
 	if ( typeof referenceInput === "function" ) {
@@ -43,13 +46,20 @@ export default function deepTypeEquals<T>( referenceInput: T, dataToTest: Omit<T
 }
 
 const isBasicMatch = ( a: unknown, b: unknown ): boolean => {
-	return a === b || typeof a === typeof b;
+	return typeof a === typeof b;
 };
 
 export function union<T>( ...args: T[]): T {
 	// @ts-ignore
 	return ( input: T ) => {
 		return args.some( arg => deepTypeEquals( arg, input ));
+	};
+}
+
+export function literal<T>( arg: T ): T {
+	// @ts-ignore
+	return ( input: T ) => {
+		return arg === input;
 	};
 }
 

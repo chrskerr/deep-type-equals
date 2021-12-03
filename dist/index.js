@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.unknown = exports.union = void 0;
+exports.unknown = exports.literal = exports.union = void 0;
 function deepTypeEquals(referenceInput, dataToTest) {
     let isTypeMatch = false;
     if (typeof referenceInput === "function") {
@@ -38,7 +38,7 @@ function deepTypeEquals(referenceInput, dataToTest) {
 }
 exports.default = deepTypeEquals;
 const isBasicMatch = (a, b) => {
-    return a === b || typeof a === typeof b;
+    return typeof a === typeof b;
 };
 function union(...args) {
     // @ts-ignore
@@ -47,6 +47,13 @@ function union(...args) {
     };
 }
 exports.union = union;
+function literal(arg) {
+    // @ts-ignore
+    return (input) => {
+        return arg === input;
+    };
+}
+exports.literal = literal;
 function unknown() {
     // @ts-ignore
     return () => true;
