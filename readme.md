@@ -2,20 +2,56 @@
 
 This package is a helper to perform runtime typechecking for TS projects.
 
-## Examples
+## Usage
+
+### Using a typed example object
+
+You should pecify the idealObject type in either of the following methods to ensure that the idealObject always matches the type it is checking against.
+
+```ts
+interface IExample {
+ id: number,
+ value: string,
+}
+
+const idealObject: IExample = {
+ id: 1,
+ value: "value",
+}
+
+const result: boolean = deepTypeEquals(idealObject, dataToTest);
+```
+
+### Using a type parameters
+
+```ts
+interface IExample {
+ id: number,
+ value: string,
+}
+
+const idealObject = {
+ id: 1,
+ value: "value",
+}
+
+const result: boolean = deepTypeEquals<IExample>(idealObject, dataToTest);
+```
+
+### Set Up
 
 ```bash
 npm i deep-type-equals
 yarn add deep-type-equals
 ```
 
-```tsx
+```ts
 import deepTypeEquals, { union } from "deep-type-equals";
 ```
 
 ### Basic Types
 
-```tsx
+```ts
 deepTypeEquals<string>( "test string", "string to test" ); // true
 deepTypeEquals<string>( "test string", 12 ); //false
 
@@ -29,14 +65,14 @@ deepTypeEquals<boolean>( true, "true" ); //false
 
 ### Arrays
 
-```tsx
+```ts
 deepTypeEquals<string[]>([ "test string" ], [ "input" ]); // true
 deepTypeEquals<string[]>([ "test string" ], "input" ); // false
 ```
 
 ### Union Types
 
-```tsx
+```ts
  type TestUnion = string | number;
  const testCase = union<TestUnion>( "test string", 123 );
 
@@ -44,7 +80,7 @@ deepTypeEquals<string[]>([ "test string" ], "input" ); // false
  deepTypeEquals<TestUnion>( testCase, true ); // false;
 ```
 
-```tsx
+```ts
  type TestUnion = string | number;
  const testCase = union<TestUnion>( "test string", 123 );
 
