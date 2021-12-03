@@ -1,4 +1,4 @@
-export default function deepTypeEquals<T>( referenceInput: T, dataToTest: T ): boolean {
+export default function deepTypeEquals<T>( referenceInput: T, dataToTest: Omit<T, ""> ): boolean {
 	let isTypeMatch = false;
 	
 	if ( typeof referenceInput === "function" ) {
@@ -24,7 +24,7 @@ export default function deepTypeEquals<T>( referenceInput: T, dataToTest: T ): b
 
 		} else {
 			isTypeMatch = !testEntries.some(([ key, value ]) => {
-				return !deepTypeEquals( value, typedDataToTest[ key ]);
+				return !deepTypeEquals( value, typedDataToTest[ key ] as typeof value );
 			});
 
 		}
@@ -48,7 +48,7 @@ const isBasicMatch = ( a: unknown, b: unknown ): boolean => {
 
 export function union<T>( ...args: T[]): T {
 	// @ts-ignore
-	return ( input: unknown ) => {
+	return ( input: T ) => {
 		return args.some( arg => deepTypeEquals( arg, input ));
 	};
 }
