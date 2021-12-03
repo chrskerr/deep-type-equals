@@ -4,9 +4,9 @@ This package is a helper to perform runtime typechecking for TS projects.
 
 ## Usage
 
-### Using a typed example object
-
 You should pecify the idealObject type in either of the following methods to ensure that the idealObject always matches the type it is checking against.
+
+### Using a typed example object
 
 ```ts
 interface IExample {
