@@ -2,6 +2,8 @@
 
 This package is a helper to perform runtime typechecking for TS projects.
 
+Probably can't be imported yet. Package.json is likely wrong.
+
 ## Usage
 
 You should pecify the idealObject type in either of the following methods to ensure that the idealObject always matches the type it is checking against.
@@ -74,19 +76,19 @@ deepTypeEquals<string[]>([ "test string" ], "input" ); // false
 
 ```ts
  type TestUnion = string | number;
- const testCase = union<TestUnion>( "test string", 123 );
+ const reference = union<TestUnion>( "test string", 123 );
 
- deepTypeEquals<TestUnion>( testCase, "string to test" ); // true;
- deepTypeEquals<TestUnion>( testCase, true ); // false;
+ deepTypeEquals<TestUnion>( reference, "string to test" ); // true;
+ deepTypeEquals<TestUnion>( reference, true ); // false;
 ```
 
 ```ts
  type TestUnion = string | number;
- const testCase = union<TestUnion>( "test string", 123 );
+ const reference = [ union<TestUnion>( "test string", 123 )];
 
- const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], [ "string to test" ]); // true;
- const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], [ "string to test", 243 ]); // true;
- const isEqual = deepTypeEquals<TestUnion[]>([ testCase ], "string to test" ); // false;
+ deepTypeEquals<TestUnion[]>( reference, [ "string to test" ]); // true;
+ deepTypeEquals<TestUnion[]>( reference, [ "string to test", 243 ]); // true;
+ deepTypeEquals<TestUnion[]>( reference, "string to test" ); // false;
 ```
 
 ## To do
