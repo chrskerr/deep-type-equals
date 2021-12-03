@@ -1,5 +1,5 @@
 
-import deepTypeEquals, { unknown } from "../../src";
+import deepTypeEquals, { unknown } from "../";
 
 test( "string", () => {
 	const result = deepTypeEquals<unknown>( unknown(), "string to test" );

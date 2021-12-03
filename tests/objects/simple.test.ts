@@ -1,5 +1,5 @@
 
-import deepTypeEquals from "../../src";
+import deepTypeEquals from "../";
 
 test( "single key", () => {
 	interface Type {

@@ -1,5 +1,5 @@
 
-import deepTypeEquals, { union } from "../../src";
+import deepTypeEquals, { union } from "../";
 
 test( "string | number 1", () => {
 	type Union = string | number 

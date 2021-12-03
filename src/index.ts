@@ -1,4 +1,4 @@
-export default function deepTypeEquals<T>( referenceInput: T, dataToTest: unknown ): boolean {
+export default function deepTypeEquals<T>( referenceInput: T, dataToTest: T ): boolean {
 	let isTypeMatch = false;
 	
 	if ( typeof referenceInput === "function" ) {
