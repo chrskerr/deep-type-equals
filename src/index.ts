@@ -1,10 +1,15 @@
 export default function deepTypeEquals<T>( testInput: T, dataToTest: unknown ): boolean {
 	let isTypeMatch = false;
-
-	if ( Array.isArray( testInput ) && Array.isArray( dataToTest )) {
-		isTypeMatch = !dataToTest.some(( curr ) => {
-			return !deepTypeEquals( testInput[ 0 ], curr );
-		});
+	
+	if ( typeof testInput === "function" ) {
+		isTypeMatch = testInput( dataToTest );
+	}
+	else if ( Array.isArray( testInput )) {
+		if ( Array.isArray( dataToTest )) {
+			isTypeMatch = !dataToTest.some(( curr ) => {
+				return !deepTypeEquals( testInput[ 0 ], curr );
+			});
+		}
 	} else if ( typeof testInput === "object" && typeof dataToTest === "object" ) {
 		const testEntries = Object.entries( testInput );
 		const typedDataToTest = dataToTest as Record<string, unknown>;
@@ -16,9 +21,20 @@ export default function deepTypeEquals<T>( testInput: T, dataToTest: unknown ): 
 		if ( Number.isNaN( testInput ) || Number.isNaN( dataToTest )) {
 			isTypeMatch = false; 
 		} else {
-			isTypeMatch = typeof testInput === typeof dataToTest;
+			isTypeMatch = isBasicMatch( testInput, dataToTest );
 		}
 	}
 
 	return isTypeMatch;
+}
+
+const isBasicMatch = ( a: unknown, b: unknown ): boolean => {
+	return a === b || typeof a === typeof b;
+};
+
+export function union<T>( ...args: T[]): T {
+	// @ts-ignore
+	return ( input: unknown ) => {
+		return args.some( arg => isBasicMatch( arg, input ));
+	};
 }

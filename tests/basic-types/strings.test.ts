@@ -6,6 +6,11 @@ test( "string", () => {
 	expect( result ).toBe( true );
 });
 
+test( "string literal", () => {
+	const result = deepTypeEquals<"dummy string">( "dummy string", "string to test" );
+	expect( result ).toBe( true );
+});
+
 test( "empty string", () => {
 	const result = deepTypeEquals<string>( "dummy string", "" );
 	expect( result ).toBe( true );

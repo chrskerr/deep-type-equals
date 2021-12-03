@@ -1,24 +1,5 @@
 "use strict";
-const testObject = {
-    one: '',
-    two: 2,
-    three: [
-        {
-            something: true,
-            another: [true],
-        },
-    ],
-};
-const runtimeTest = {
-    one: 'asdfasdf',
-    two: 2163,
-    three: [
-        {
-            something: false,
-            another: [false, false, true],
-        },
-    ],
-};
+Object.defineProperty(exports, "__esModule", { value: true });
 function deepTypeEquals(testInput, dataToTest) {
     let isTypeMatch = false;
     if (Array.isArray(testInput) && Array.isArray(dataToTest)) {
@@ -26,7 +7,7 @@ function deepTypeEquals(testInput, dataToTest) {
             return !deepTypeEquals(testInput[0], curr);
         });
     }
-    else if (typeof testInput === 'object' && typeof dataToTest === 'object') {
+    else if (typeof testInput === "object" && typeof dataToTest === "object") {
         const testEntries = Object.entries(testInput);
         const typedDataToTest = dataToTest;
         isTypeMatch = !testEntries.some(([key, value]) => {
@@ -34,9 +15,14 @@ function deepTypeEquals(testInput, dataToTest) {
         });
     }
     else {
-        isTypeMatch = typeof testInput === typeof dataToTest;
+        if (Number.isNaN(testInput) || Number.isNaN(dataToTest)) {
+            isTypeMatch = false;
+        }
+        else {
+            isTypeMatch = typeof testInput === typeof dataToTest;
+        }
     }
     return isTypeMatch;
 }
-console.log(deepTypeEquals(testObject, runtimeTest));
+exports.default = deepTypeEquals;
 //# sourceMappingURL=index.js.map
