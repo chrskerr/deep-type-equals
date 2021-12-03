@@ -119,3 +119,5 @@ deepTypeEquals<{ key: string }>({ key: "test string" }, "input" ); // false
 
 - Add `function` type checker function
 - Add literals
+- Add more tests
+- Find edge cases which need more nuance
