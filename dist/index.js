@@ -1,28 +1,55 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-function deepTypeEquals(testInput, dataToTest) {
+exports.unknown = exports.union = void 0;
+function deepTypeEquals(referenceInput, dataToTest) {
     let isTypeMatch = false;
-    if (Array.isArray(testInput) && Array.isArray(dataToTest)) {
-        isTypeMatch = !dataToTest.some((curr) => {
-            return !deepTypeEquals(testInput[0], curr);
-        });
+    if (typeof referenceInput === "function") {
+        isTypeMatch = referenceInput(dataToTest);
     }
-    else if (typeof testInput === "object" && typeof dataToTest === "object") {
-        const testEntries = Object.entries(testInput);
+    else if (Array.isArray(referenceInput)) {
+        if (Array.isArray(dataToTest)) {
+            isTypeMatch = !dataToTest.some((curr) => {
+                return !deepTypeEquals(referenceInput[0], curr);
+            });
+        }
+    }
+    else if (typeof referenceInput === "object" && typeof dataToTest === "object") {
+        const testEntries = Object.entries(referenceInput);
         const typedDataToTest = dataToTest;
-        isTypeMatch = !testEntries.some(([key, value]) => {
-            return !deepTypeEquals(value, typedDataToTest[key]);
-        });
-    }
-    else {
-        if (Number.isNaN(testInput) || Number.isNaN(dataToTest)) {
+        const dataEntries = Object.entries(typedDataToTest);
+        if (testEntries.length !== dataEntries.length) {
             isTypeMatch = false;
         }
         else {
-            isTypeMatch = typeof testInput === typeof dataToTest;
+            isTypeMatch = !testEntries.some(([key, value]) => {
+                return !deepTypeEquals(value, typedDataToTest[key]);
+            });
+        }
+    }
+    else {
+        if (Number.isNaN(referenceInput) || Number.isNaN(dataToTest)) {
+            isTypeMatch = false;
+        }
+        else {
+            isTypeMatch = isBasicMatch(referenceInput, dataToTest);
         }
     }
     return isTypeMatch;
 }
 exports.default = deepTypeEquals;
+const isBasicMatch = (a, b) => {
+    return a === b || typeof a === typeof b;
+};
+function union(...args) {
+    // @ts-ignore
+    return (input) => {
+        return args.some(arg => deepTypeEquals(arg, input));
+    };
+}
+exports.union = union;
+function unknown() {
+    // @ts-ignore
+    return () => true;
+}
+exports.unknown = unknown;
 //# sourceMappingURL=index.js.map

@@ -56,3 +56,83 @@ test( "array union 4", () => {
 	const result = deepTypeEquals<Union[]>([ union<Union>( "string", 2512 ) ], [ "string to test", 245 ]);
 	expect( result ).toBe( true );
 });
+
+test( "object union", () => {
+	type Type = {
+		key: string,
+		second: number,
+	} | {
+		third: boolean,
+		fourth: boolean,
+	}
+
+	const reference = union<Type>({ key: "string", second: 123 }, { third: true, fourth: false });
+
+	const testData = { 
+		key: "something", 
+		second: 987, 
+	};
+
+	const result = deepTypeEquals<Type>( reference,  testData );
+	expect( result ).toBe( true );
+});
+
+test( "object union 2", () => {
+	type Type = {
+		key: string,
+		second: number,
+	} | {
+		third: boolean,
+		fourth: boolean,
+	}
+
+	const reference = union<Type>({ key: "string", second: 123 }, { third: true, fourth: false });
+
+	const testData = { 
+		third: true, 
+		fourth: true, 
+	};
+
+	const result = deepTypeEquals<Type>( reference,  testData );
+	expect( result ).toBe( true );
+});
+
+test( "object union 3", () => {
+	type Type = {
+		key: string,
+		second: number,
+	} | {
+		third: boolean,
+		fourth: boolean,
+	}
+
+	const reference = union<Type>({ key: "string", second: 123 }, { third: true, fourth: false });
+
+	const testData = { 
+		third: true, 
+		key: true, 
+	};
+
+	const result = deepTypeEquals<Type>( reference,  testData );
+	expect( result ).toBe( false );
+});
+
+test( "object union 4", () => {
+	type Type = {
+		key: string,
+		second: number,
+	} | {
+		third: boolean,
+		fourth: boolean,
+	}
+
+	const reference = union<Type>({ key: "string", second: 123 }, { third: true, fourth: false });
+
+	const testData = { 
+		key: true, 
+		second: true, 
+	};
+
+	const result = deepTypeEquals<Type>( reference,  testData );
+	expect( result ).toBe( false );
+});

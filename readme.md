@@ -1,8 +1,6 @@
 # Deep Type Equals
 
-This package is a helper to perform runtime typechecking for TS projects.
-
-Probably can't be imported yet. Package.json is likely wrong.
+This package is a zero dependency helper to perform runtime typechecking for TS projects.
 
 ## Usage
 
@@ -48,7 +46,7 @@ yarn add deep-type-equals
 ```
 
 ```ts
-import deepTypeEquals, { union } from "deep-type-equals";
+import deepTypeEquals, { union, unknown } from "deep-type-equals";
 ```
 
 ### Basic Types
@@ -72,6 +70,15 @@ deepTypeEquals<string[]>([ "test string" ], [ "input" ]); // true
 deepTypeEquals<string[]>([ "test string" ], "input" ); // false
 ```
 
+### Objects
+
+These will fail on extra keys, missing keys, and deeply checked mismatched types.
+
+```ts
+deepTypeEquals<{ key: string }>({ key: "test string" }, { key: "input" }); // true
+deepTypeEquals<{ key: string }>({ key: "test string" }, "input" ); // false
+```
+
 ### Union Types
 
 ```ts
@@ -91,8 +98,12 @@ deepTypeEquals<string[]>([ "test string" ], "input" ); // false
  deepTypeEquals<TestUnion[]>( reference, "string to test" ); // false;
 ```
 
+```ts
+ deepTypeEquals<TestUnion[]>( unknown(), [ "string to test" ]); // true;
+ deepTypeEquals<TestUnion[]>( unknown(), "string to test" ); // true;
+```
+
 ## To do
 
-- Add `unknown` / `any` type checker function
 - Add `function` type checker function
-- Add tests and docs for object / record types (these should work, but are untested)
+- Add literals

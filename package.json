@@ -1,8 +1,9 @@
 {
   "name": "deep-type-equals",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Deep runtime type equality testing",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "start": "tsc && node dist/index.js",
     "test": "jest"
