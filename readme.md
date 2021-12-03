@@ -102,9 +102,12 @@ deepTypeEquals<{ key: string }>({ key: "test string" }, "input" ); // false
  deepTypeEquals<TestUnion[]>( reference, "string to test" ); // false;
 ```
 
+### Unknown Types
+
 ```ts
  deepTypeEquals<TestUnion[]>( unknown(), [ "string to test" ]); // true;
  deepTypeEquals<TestUnion[]>( unknown(), "string to test" ); // true;
+ deepTypeEquals<TestUnion[]>( unknown(), 123 ); // true;
 ```
 
 ## To do
