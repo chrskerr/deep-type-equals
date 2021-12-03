@@ -1,3 +1,7 @@
+![gzip size badge](https://img.badgesize.io/chrskerr/deep-type-equals/master/dist/index.js?compression=gzip)
+[![Jest](https://github.com/chrskerr/deep-type-equals/actions/workflows/tests.yml/badge.svg?event=push)](https://github.com/chrskerr/deep-type-equals/actions/workflows/tests.yml)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 # Deep Type Equals
 
 This package is a zero dependency helper to perform runtime typechecking for TS projects.
