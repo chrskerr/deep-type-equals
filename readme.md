@@ -3,8 +3,13 @@
 ![gzip size badge](https://img.badgesize.io/chrskerr/deep-type-equals/master/dist/index.js?compression=gzip)
 ![Jest](https://github.com/chrskerr/deep-type-equals/actions/workflows/tests.yml/badge.svg?event=push)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![NPM Version](https://img.shields.io/npm/v/deep-type-equals)](https://www.npmjs.com/package/deep-type-equals)
 
-This package is a zero dependency helper to perform runtime typechecking for TS projects.
+## Purpose
+
+This package is a zero dependency helper design to perform deep type equality checks at runtime.
+
+It uses your existing types plus a typed reference object to confirm if input data matches the intended type.
 
 ## Usage
 
@@ -23,7 +28,7 @@ const reference: IExample = {
  value: "value",
 }
 
-const result: boolean = deepTypeEquals(reference, input);
+const result: boolean = deepTypeEquals(reference, input); // true or false
 ```
 
 ### Using a type parameters
@@ -39,7 +44,7 @@ const reference = {
  value: "value",
 }
 
-const result: boolean = deepTypeEquals<IExample>(reference, input);
+const result: boolean = deepTypeEquals<IExample>(reference, input); // true or false
 ```
 
 ### Set Up
