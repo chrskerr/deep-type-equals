@@ -7,7 +7,7 @@
 
 ## Purpose
 
-This package is a small, simple helper design to perform deep type equality checks at runtime.
+This package is a small, simple helper designed to perform deep type equality checks at runtime.
 
 - It uses your existing types plus a typed reference object to confirm if input data matches the intended type.
 - Works on simple types, literals, unions, arrays, objects and unknown.
