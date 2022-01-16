@@ -85,3 +85,8 @@ test( "false mixed[] 3", () => {
 	const result = deepTypeEquals<boolean[]>([ false ], [[ true ], false, true ]);
 	expect( result ).toBe( false );
 });
+
+test( "dates", () => {
+	const result = deepTypeEquals<boolean[]>([ false ], new Date());
+	expect( result ).toBe( false );
+});

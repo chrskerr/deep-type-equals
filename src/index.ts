@@ -21,6 +21,10 @@ export default function deepTypeEquals<T>(
 
 	}
 
+	else if ( reference instanceof Date ) {
+		return data instanceof Date;
+	}
+
 	else if ( Array.isArray( reference ) && Array.isArray( data )) {
 		return !data.some(( curr ) => {
 			return !deepTypeEquals( reference[ 0 ], curr );

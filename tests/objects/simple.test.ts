@@ -94,3 +94,20 @@ test( "mixed keys 4", () => {
 	const result = deepTypeEquals<Type>( reference , { key: "something", second: 123, third: true, fourth: "something" });
 	expect( result ).toBe( false );
 });
+
+test( "dates", () => {
+	type Type = {
+		key: string,
+		second: number,
+		third: boolean,
+	}
+
+	const reference = {
+		key: "test",
+		second: 123,
+		third: false,
+	};
+
+	const result = deepTypeEquals<Type>( reference , new Date());
+	expect( result ).toBe( false );
+});

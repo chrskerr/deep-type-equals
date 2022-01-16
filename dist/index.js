@@ -11,6 +11,9 @@ function deepTypeEquals(reference, data, options) {
     if (typeof reference === "function") {
         return reference(data);
     }
+    else if (reference instanceof Date) {
+        return data instanceof Date;
+    }
     else if (Array.isArray(reference) && Array.isArray(data)) {
         return !data.some((curr) => {
             return !deepTypeEquals(reference[0], curr);
